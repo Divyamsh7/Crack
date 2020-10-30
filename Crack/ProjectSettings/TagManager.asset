@@ -8,6 +8,7 @@ TagManager:
   - Common
   - Right
   - Others
+  - Restart
   layers:
   - Default
   - TransparentFX
