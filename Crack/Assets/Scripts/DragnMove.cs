@@ -9,7 +9,7 @@ public class DragnMove : MonoBehaviour
 
     // touch offset allows ball not to shake when it starts moving
     float deltaX, deltaY;
-
+    bool collided = false;
 
     // reference to Rigidbody2D component
     Rigidbody2D rb;
@@ -27,9 +27,26 @@ public class DragnMove : MonoBehaviour
 
     }
 
+    private void OnCollisionEnter2D(Collision2D other)
+    {
 
-    // Update is called once per frame
-    void Update()
+        if (other.collider.gameObject.GetComponent<Rigidbody2D>().ToString().Equals("Character (UnityEngine.Rigidbody2D)") )
+        {
+            collided = true;
+        }
+    }
+
+    private void OnCollisionExit2D(Collision2D other) {
+        if (other.collider.gameObject.GetComponent<Rigidbody2D>().ToString().Equals("Character (UnityEngine.Rigidbody2D)"))
+        {
+            collided = false;
+        }
+
+    }
+
+
+        // Update is called once per frame
+        void Update()
     {
 
 
@@ -70,9 +87,9 @@ public class DragnMove : MonoBehaviour
 
                         // if touch begins within the ball collider
                         // then it is allowed to move
-                        moveAllowed = true;
-
-
+                        
+                            moveAllowed = true;
+                      
                         // restrict some rigidbody properties so it moves
                         // more  smoothly and correctly
                         rb.freezeRotation = true;
@@ -89,7 +106,13 @@ public class DragnMove : MonoBehaviour
                     // if you touches the ball and movement is allowed then move
                     rb.bodyType = RigidbodyType2D.Dynamic;
                     if (GetComponent<BoxCollider2D>() == Physics2D.OverlapPoint(touchPos) && moveAllowed)
-                        rb.MovePosition(new Vector2(touchPos.x - deltaX, touchPos.y - deltaY));
+                    {
+                        if (!collided)
+                        {
+                            rb.MovePosition(new Vector2(touchPos.x - deltaX, touchPos.y - deltaY));
+                        }
+                    }
+                        
                    // rb.bodyType = RigidbodyType2D.Static;
                     break;
 
