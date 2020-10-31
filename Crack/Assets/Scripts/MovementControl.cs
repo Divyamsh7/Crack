@@ -8,9 +8,9 @@ public class MovementControl : MonoBehaviour
 {
     float dirX;
     int doubleJump = 0;
-
+   
     public float moveSpeed = 3f, jumpForce = 400f;
-
+    
     Rigidbody2D rb;
 
     void Start() {
@@ -19,20 +19,24 @@ public class MovementControl : MonoBehaviour
 
     void Update() {
         dirX = CrossPlatformInputManager.VirtualAxisReference("Horizontal").GetValue;
-        //Debug.Log("dir value "+dirX);
-
+        
         if (CrossPlatformInputManager.GetButtonDown("Jump"))
+        {
             DoJump();
+        }
+       
     }
 
     private void OnCollisionEnter2D(Collision2D other)
     {
+        doubleJump = 0;
+
         if (other.collider.gameObject.tag == "Restart")
         {
            // Debug.Log("Restart");
             SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
         }
-        doubleJump = 0;
+        
     }
     
         void FixedUpdate()
@@ -42,13 +46,22 @@ public class MovementControl : MonoBehaviour
 
     public void DoJump()
     {
+        
         if (doubleJump<=1)
+            rb.AddForce(new Vector2(0, jumpForce), ForceMode2D.Force);
+        doubleJump++;
+
+    }
+    
+   /* public void jumpBoost() {
+        if (hold && jumptime >= 5 && jumptime <= 45)
         {
             rb.AddForce(new Vector2(0, jumpForce), ForceMode2D.Force);
-            doubleJump++;
         }
-            
-    }
+       
+        invoke("jumpBoost", 1f);
+    }*/
+
 }
 /*
  public class LevelComplete : MonoBehaviour

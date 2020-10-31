@@ -43,7 +43,7 @@ public class cinezoom : MonoBehaviour
 
         }
 
-        vcam.m_Lens.OrthographicSize = Mathf.Clamp(vcam.m_Lens.OrthographicSize, 2f, 100f);
+       // vcam.m_Lens.OrthographicSize = Mathf.Clamp(vcam.m_Lens.OrthographicSize, 6f, 100f);
         //text.text = "Camera size " + mainCamera.orthographicSize;
 
     }

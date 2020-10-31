@@ -38,11 +38,11 @@ public class GameManager : MonoBehaviour
             {
                 possibility = false;
             }
-            else if (left == 2 && common == 2 && right == 0)
+            else if (left == 4 && common == 4 && right == 0)
             {
                 Completed();
             }
-            else if (left == 0 && common == 2 && right == 2)
+            else if (left == 0 && common == 4 && right == 4)
             {
                 Completed();
             }
