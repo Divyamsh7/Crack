@@ -9,6 +9,7 @@ TagManager:
   - Right
   - Others
   - Restart
+  - CommonUp
   layers:
   - Default
   - TransparentFX

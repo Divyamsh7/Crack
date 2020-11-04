@@ -1,28 +1,33 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using Cinemachine;
+using UnityEngine.UI;
 
-public class cinezoom : MonoBehaviour
+public class ZoomInandOut : MonoBehaviour
 {
+    Camera mainCamera;
 
     float touchesPrevPosDifference, touchesCurPosDifference, zoomModifier;
 
     Vector2 firstTouchPrevPos, secondTouchPrevPos;
 
     [SerializeField]
-    float zoomModifierSpeed = 0.1f;
+    float zoomModifierSpeed = 0.001f;
+
+    [SerializeField]
+    Text text;
+    //text.Text = (UnityEngine.UI.Text)"none";
+
+    // Use this for initialization
+    void Start()
+    {
+        mainCamera = GetComponent<Camera>();
+    }
 
     // Update is called once per frame
     void Update()
     {
-        var camera = Camera.main;
-        var brain = (camera == null) ? null : camera.GetComponent<CinemachineBrain>();
-        var vcam = (brain == null) ? null : brain.ActiveVirtualCamera as CinemachineVirtualCamera;
-       /* if (vcam != null)
-        {
-            vcam.m_Lens.OrthographicSize = 30;
-        }*/
+
         if (Input.touchCount == 2)
         {
             Touch firstTouch = Input.GetTouch(0);
@@ -37,16 +42,29 @@ public class cinezoom : MonoBehaviour
             zoomModifier = (firstTouch.deltaPosition - secondTouch.deltaPosition).magnitude * zoomModifierSpeed;
 
             if (touchesPrevPosDifference > touchesCurPosDifference)
-                vcam.m_Lens.OrthographicSize += zoomModifier;
+            {
+                mainCamera.orthographicSize += zoomModifier;
+                if (mainCamera.orthographicSize >= 36f)
+                {
+                    zoomModifierSpeed = 0.01f;
+                }
+            }
+
             if (touchesPrevPosDifference < touchesCurPosDifference)
-                vcam.m_Lens.OrthographicSize -= zoomModifier;
+            {
+                mainCamera.orthographicSize -= zoomModifier;
+              /*  if (mainCamera.orthographicSize >= 36f)
+                {
+                    zoomModifierSpeed = 0.01f;
+                }*/
+                
+            }
+                
 
         }
 
-       // vcam.m_Lens.OrthographicSize = Mathf.Clamp(vcam.m_Lens.OrthographicSize, 6f, 100f);
-        //text.text = "Camera size " + mainCamera.orthographicSize;
+        mainCamera.orthographicSize = Mathf.Clamp(mainCamera.orthographicSize, 2f, 260f);
+        text.text = "Camera size " + mainCamera.orthographicSize;
 
     }
-
 }
-

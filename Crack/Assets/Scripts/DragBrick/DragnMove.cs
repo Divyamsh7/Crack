@@ -19,6 +19,21 @@ public class DragnMove : MonoBehaviour
     bool moveAllowed = false;
 
 
+    //for cutg
+    private BoxCollider2D bc;
+
+    private void Awake()
+    {
+        bc = GetComponent<BoxCollider2D>();
+    }
+
+    public void turnoffbcdrag()
+    {
+        bc.enabled = false;
+    }
+    //cutg end
+
+
     // Use this for initialization
     void Start()
     {
