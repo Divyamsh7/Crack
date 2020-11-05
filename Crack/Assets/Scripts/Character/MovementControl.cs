@@ -16,6 +16,7 @@ public class MovementControl : MonoBehaviour
     void Start()
     {
         rb = GetComponent<Rigidbody2D>();
+        //PlayerPrefs.DeleteAll();
     }
 
 
@@ -37,11 +38,26 @@ public class MovementControl : MonoBehaviour
     private void OnCollisionEnter2D(Collision2D other)
     {
         doubleJump = 0;
+        if (other.collider.gameObject.name == "BrickOthers (139)") {
+            // Debug.Log("We hit checkpoint brick");
+            //PlayerPrefs.SetInt("AllHints", 1);
+            //Debug.Log("ALl hints is " + PlayerPrefs.GetInt("AllHints", 0));
+            if (PlayerPrefs.GetInt("AllHints", 0) == 1 && PlayerPrefs.GetInt("Restart", 1) == 1)
+            {
+                PlayerPrefs.SetInt("ReachCheckPointBrick", PlayerPrefs.GetInt("ReachCheckPointBrick", 0) + 1);
+                PlayerPrefs.SetInt("Restart", 0);
+                //  Debug.Log("We hit it "+ PlayerPrefs.GetInt("ReachCheckPointBrick", 0) +" times");
+            }
+            Debug.Log("ReachCheckPointBrick " + PlayerPrefs.GetInt("ReachCheckPointBrick", 0));
+
+            // Debug.Log("We hit checkpoint brick");
+        } 
+       // Debug.Log(other.collider.gameObject.name);
 
         if (other.collider.gameObject.tag == "Restart")
         {
-            // Debug.Log("Restart");
-            SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
+                PlayerPrefs.SetInt("Restart", 1);
+                SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
         }
 
     }

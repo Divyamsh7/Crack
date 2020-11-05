@@ -38,6 +38,7 @@ public class Pausemenu : MonoBehaviour
     public void Resume()
     {
         pauseMenuUI.SetActive(false);
+       // FindObjectOfType<MainPanel>().EnableMainPanelUI();
         Time.timeScale = 1f;
         GameIsPaused = false;
 
@@ -46,20 +47,39 @@ public class Pausemenu : MonoBehaviour
 
     void Pause()
     {
+        
         pauseMenuUI.SetActive(true);
+        // FindObjectOfType<MainPanel>().EnableMainPanelUI();
 
-        //checking whether first hint condition is met
+        //checking whether hint condition is met
+        /*if (true) {
+            FindObjectOfType<Hintbutton>().HintButtonInteractable();
+            FindObjectOfType<HinttextActive>().ChangeColour();
+        }*/
+       // Debug.Log("First Hint " + PlayerPrefs.GetInt("FirstHint", 0));
+       // Debug.Log("AllHints " + PlayerPrefs.GetInt("AllHints", 0));
         if (PlayerPrefs.GetInt("FirstHint", 0) == 1 || PlayerPrefs.GetInt("AllHints", 0) == 1)
         {
+            
             //FindObjectOfType<checkpointbutton>().CheckPointButtonInteractable();
             //FindObjectOfType<checkpointselected>().ChangeColour();
             FindObjectOfType<Hintbutton>().HintButtonInteractable();
             FindObjectOfType<HinttextActive>().ChangeColour();
-
+        }
+       // Debug.Log("ReachCheckPointBrick " + PlayerPrefs.GetInt("ReachCheckPointBrick", 0));
+        //checking whether checkpoint condition is met
+        if (PlayerPrefs.GetInt("ReachCheckPointBrick", 0) >= 3)
+        {
+           // Debug.Log("Condition satisfied");
+            //FindObjectOfType<checkpointbutton>().CheckPointButtonInteractable();
+            //FindObjectOfType<checkpointselected>().ChangeColour();
+            FindObjectOfType<CheckPointButton>().CheckPointButtonInteractable();
+            FindObjectOfType<CheckPointTextActive>().ChangeColour();
         }
 
         Time.timeScale = 0f;
         GameIsPaused = true;
+       // FindObjectOfType<MainPanel>().DisableMainPanelUI();
 
     }
 
@@ -80,10 +100,27 @@ public class Pausemenu : MonoBehaviour
 
     public void Hints()
     {
-        if (PlayerPrefs.GetInt("AllHints", 0) == 1)
+      //  Debug.Log("Hints Called");
+        FindObjectOfType<Hints>().ClickedOnHints();
+       /* if (PlayerPrefs.GetInt("AllHints", 0) == 1)
             Debug.Log("All Hint Activated");
         else
-            Debug.Log("First Hint Activated");
+            Debug.Log("First Hint Activated");*/
+    }
+
+    public void EnablePauseMenuUI()
+    {
+        pauseMenuUI.SetActive(true);
+    }
+
+    public void DisablePauseMenuUI()
+    {
+        pauseMenuUI.SetActive(false);
+    }
+
+    public void CheckPoint()
+    {
+        SceneManager.LoadScene("CheckPoint");
     }
 
 
