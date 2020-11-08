@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityStandardAssets.CrossPlatformInput;
 using UnityEngine.SceneManagement;
+using UnityEngine.UI;
 
 public class MovementControl : MonoBehaviour
 {
@@ -11,19 +12,46 @@ public class MovementControl : MonoBehaviour
 
     public float moveSpeed = 3f, jumpForce = 400f;
 
-    Rigidbody2D rb;
-
+    Rigidbody2D rb;    
+    public Text textHint1;
     void Start()
     {
+        
         rb = GetComponent<Rigidbody2D>();
-        //PlayerPrefs.DeleteAll();
+
+
+       // PlayerPrefs.DeleteAll();
     }
 
+    public void TextHint1()
+    {
+        textHint1.text = "Hint 1 Unlocked";
+        StartCoroutine(FadeTextToZeroAlpha(1f, textBox));
+    }
 
+    public IEnumerator FadeTextToZeroAlpha(float t, Text i)
+    {
+        i.color = new Color(i.color.r, i.color.g, i.color.b, 1);
+        while(i.color.a > 0.0f)
+        {
+            i.color = new Color(i.color.r, i.color.g, i.color.b, i.color.a - (Time.deltaTime / t));
+            yield return null;
+        }
+    }
 
     void Update()
     {
+        
+        if (PlayerPrefs.GetInt("Cutg", 0) == 1) {
+            PlayerPrefs.SetFloat("time", (PlayerPrefs.GetFloat("time", 0) + Time.deltaTime));
+        }
+        if (PlayerPrefs.GetFloat("time", 0) > 900 && PlayerPrefs.GetFloat("time", 0) < 910)
+        {
+            PlayerPrefs.SetInt("FirstHint", 1);
 
+            //textBox.text = PlayerPrefs.GetFloat("time", 0).ToString();
+        }
+           
         dirX = CrossPlatformInputManager.VirtualAxisReference("Horizontal").GetValue;
 
         if (CrossPlatformInputManager.GetButtonDown("Jump"))
@@ -78,7 +106,7 @@ public class MovementControl : MonoBehaviour
 
     public void Push()
     {
-        rb.AddForce(new Vector2(10000, 0), ForceMode2D.Force);
+        rb.AddForce(new Vector2(50000, 0), ForceMode2D.Force);
     }
 
 

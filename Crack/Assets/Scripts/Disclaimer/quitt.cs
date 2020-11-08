@@ -11,8 +11,17 @@ public class quitt : MonoBehaviour
         if (other.collider.gameObject.GetComponent<Rigidbody2D>().ToString().Equals("Character (UnityEngine.Rigidbody2D)"))
         {
             Debug.Log("Quit");
-            Application.Quit();
+            FindObjectOfType<destroycanvas>().DisableCanvass();
+            FindObjectOfType<Cat>().EnableCatUI();
+            Invoke("QuitGame", 2);
+           
         }
 
+    }
+
+    private void QuitGame()
+    {
+        Debug.Log("Quit");
+        Application.Quit();
     }
 }

@@ -53,8 +53,7 @@ public class Pausemenu : MonoBehaviour
 
         //checking whether hint condition is met
         /*if (true) {
-            FindObjectOfType<Hintbutton>().HintButtonInteractable();
-            FindObjectOfType<HinttextActive>().ChangeColour();
+            
         }*/
        // Debug.Log("First Hint " + PlayerPrefs.GetInt("FirstHint", 0));
        // Debug.Log("AllHints " + PlayerPrefs.GetInt("AllHints", 0));
@@ -94,7 +93,7 @@ public class Pausemenu : MonoBehaviour
     {
         Time.timeScale = 1f;
         GameIsPaused = false;
-        SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex - 1);
+        SceneManager.LoadScene("Menu");
     }
 
 
@@ -120,6 +119,7 @@ public class Pausemenu : MonoBehaviour
 
     public void CheckPoint()
     {
+        Time.timeScale = 1f;
         SceneManager.LoadScene("CheckPoint");
     }
 

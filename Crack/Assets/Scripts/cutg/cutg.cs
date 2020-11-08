@@ -16,6 +16,7 @@ public class cutg : MonoBehaviour
     private void OnCollisionEnter2D(Collision2D other)
     {
 
+
         if (other.collider.gameObject.GetComponent<Rigidbody2D>().ToString().Equals("Character (UnityEngine.Rigidbody2D)"))
         {
             if (once)
@@ -28,7 +29,7 @@ public class cutg : MonoBehaviour
 
                 aud.Play();
 
-                PlayerPrefs.SetInt("FirstHint", 1);
+                PlayerPrefs.SetInt("Cutg", 1);
                 /*//CheckPoint Activated
                 FindObjectOfType<checkpointbutton>().CheckPointButtonInteractable();
                 FindObjectOfType<checkpointselected>().ChangeColour();*/

@@ -66,6 +66,6 @@ public class GameManager : MonoBehaviour
 
     private void Completed() {
        // Debug.Log("Completed");
-        SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex + 1);
+        SceneManager.LoadScene("EndCredits");
     }
 }

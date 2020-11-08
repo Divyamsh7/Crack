@@ -8,10 +8,11 @@ public class cont : MonoBehaviour
   
     private void OnCollisionEnter2D(Collision2D other)
     {
-
+        
         if (other.collider.gameObject.GetComponent<Rigidbody2D>().ToString().Equals("Character (UnityEngine.Rigidbody2D)"))
         {
-            SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex + 1);
+            PlayerPrefs.SetInt("Continue", 1);
+            //SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex + 1);
         }
 
     }
