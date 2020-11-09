@@ -53,10 +53,10 @@ public class Pausemenu : MonoBehaviour
 
         //checking whether hint condition is met
         /*if (true) {
-            
+            PlayerPrefs.SetInt("ReachCheckPointBrick", 3);
         }*/
-       // Debug.Log("First Hint " + PlayerPrefs.GetInt("FirstHint", 0));
-       // Debug.Log("AllHints " + PlayerPrefs.GetInt("AllHints", 0));
+        // Debug.Log("First Hint " + PlayerPrefs.GetInt("FirstHint", 0));
+        // Debug.Log("AllHints " + PlayerPrefs.GetInt("AllHints", 0));
         if (PlayerPrefs.GetInt("FirstHint", 0) == 1 || PlayerPrefs.GetInt("AllHints", 0) == 1)
         {
             
@@ -126,7 +126,16 @@ public class Pausemenu : MonoBehaviour
 
     public void QuitGame()
     {
-        Application.Quit();
+        Time.timeScale = 1f;
+        GameIsPaused = false;
+       
+    }
+
+    public void ughh()
+    {
+        Time.timeScale = 1f;
+        GameIsPaused = false;
         Debug.Log("Quitting game");
+        Application.Quit();
     }
 }

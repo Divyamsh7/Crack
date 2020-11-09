@@ -14,19 +14,35 @@ public class MovementControl : MonoBehaviour
 
     Rigidbody2D rb;    
     public Text textHint1;
+    public Text textCheckPoint;
     void Start()
     {
-        
+       //  TextHint1();
+       // TextCheckPoint();
         rb = GetComponent<Rigidbody2D>();
 
 
-       // PlayerPrefs.DeleteAll();
+     //   PlayerPrefs.DeleteAll();
     }
 
     public void TextHint1()
     {
+        /*var color = textHint1.color;
+        color.a = 225;
+        textHint1.color = color;*/
         textHint1.text = "Hint 1 Unlocked";
-        StartCoroutine(FadeTextToZeroAlpha(1f, textBox));
+        StartCoroutine(FadeTextToZeroAlpha(5f, textHint1));
+       
+    }
+
+    public void TextCheckPoint()
+    {
+        /*var color = textHint1.color;
+        color.a = 225;
+        textHint1.color = color;*/
+        textCheckPoint.text = "Checkpoint Unlocked";
+        StartCoroutine(FadeTextToZeroAlpha(5f, textCheckPoint));
+
     }
 
     public IEnumerator FadeTextToZeroAlpha(float t, Text i)
@@ -44,10 +60,16 @@ public class MovementControl : MonoBehaviour
         
         if (PlayerPrefs.GetInt("Cutg", 0) == 1) {
             PlayerPrefs.SetFloat("time", (PlayerPrefs.GetFloat("time", 0) + Time.deltaTime));
+           // TextHint1();
         }
         if (PlayerPrefs.GetFloat("time", 0) > 900 && PlayerPrefs.GetFloat("time", 0) < 910)
         {
+            if(PlayerPrefs.GetInt("FirstHint", 0) == 0)
+            {
+                TextHint1();
+            }
             PlayerPrefs.SetInt("FirstHint", 1);
+            
 
             //textBox.text = PlayerPrefs.GetFloat("time", 0).ToString();
         }
@@ -73,10 +95,16 @@ public class MovementControl : MonoBehaviour
             if (PlayerPrefs.GetInt("AllHints", 0) == 1 && PlayerPrefs.GetInt("Restart", 1) == 1)
             {
                 PlayerPrefs.SetInt("ReachCheckPointBrick", PlayerPrefs.GetInt("ReachCheckPointBrick", 0) + 1);
-                PlayerPrefs.SetInt("Restart", 0);
+                if (PlayerPrefs.GetInt("ReachCheckPointBrick", 0) == 3)
+                {
+                    //Debug.Log("print checkpoint text");
+                    TextCheckPoint();
+                }
+                    PlayerPrefs.SetInt("Restart", 0);
                 //  Debug.Log("We hit it "+ PlayerPrefs.GetInt("ReachCheckPointBrick", 0) +" times");
             }
-            Debug.Log("ReachCheckPointBrick " + PlayerPrefs.GetInt("ReachCheckPointBrick", 0));
+           // Debug.Log("ReachCheckPointBrick " + PlayerPrefs.GetInt("ReachCheckPointBrick", 0));
+            //TextCheckPoint();
 
             // Debug.Log("We hit checkpoint brick");
         } 
@@ -106,7 +134,7 @@ public class MovementControl : MonoBehaviour
 
     public void Push()
     {
-        rb.AddForce(new Vector2(50000, 0), ForceMode2D.Force);
+        rb.AddForce(new Vector2(20000, 0), ForceMode2D.Force);
     }
 
 

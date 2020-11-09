@@ -10,6 +10,7 @@ TagManager:
   - Others
   - Restart
   - CommonUp
+  - Movable
   layers:
   - Default
   - TransparentFX

@@ -14,8 +14,8 @@ public class ZoomInandOut : MonoBehaviour
     [SerializeField]
     float zoomModifierSpeed = 0.001f;
 
-    [SerializeField]
-    Text text;
+   // [SerializeField]
+    //Text text;
     //text.Text = (UnityEngine.UI.Text)"none";
 
     // Use this for initialization
@@ -64,7 +64,7 @@ public class ZoomInandOut : MonoBehaviour
         }
 
         mainCamera.orthographicSize = Mathf.Clamp(mainCamera.orthographicSize, 2f, 260f);
-        text.text = "Camera size " + mainCamera.orthographicSize;
+       // text.text = "Camera size " + mainCamera.orthographicSize;
 
     }
 }

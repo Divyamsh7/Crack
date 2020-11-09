@@ -1801,6 +1801,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   zoomModifierSpeed: 0.001
+  textAllHints: {fileID: 0}
 --- !u!1001 &154805622
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -2902,7 +2903,7 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls:
       - m_Target: {fileID: 41773565}
-        m_MethodName: QuitGame
+        m_MethodName: ughh
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -5077,7 +5078,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   zoomModifierSpeed: 0.001
-  text: {fileID: 2134617432}
 --- !u!1001 &529068059
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -19298,6 +19298,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: BrickMovable
       objectReference: {fileID: 0}
+    - target: {fileID: 7313376597862262742, guid: 2f04a66999270b544b14b06cefe9f701,
+        type: 3}
+      propertyPath: m_TagString
+      value: Movable
+      objectReference: {fileID: 0}
     - target: {fileID: 7313376597862262746, guid: 2f04a66999270b544b14b06cefe9f701,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -20484,7 +20489,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &2134617431
 RectTransform:
   m_ObjectHideFlags: 0

@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 using Cinemachine;
 
 public class cinezoom : MonoBehaviour
@@ -17,7 +18,29 @@ public class cinezoom : MonoBehaviour
 
     [SerializeField]
     float zoomModifierSpeed = 0.001f;
-   
+
+    public Text textAllHints;
+
+    public void TextAllHints()
+    {
+        /*var color = textHint1.color;
+        color.a = 225;
+        textHint1.color = color;*/
+        textAllHints.text = "All Hints Unlocked";
+        StartCoroutine(FadeTextToZeroAlpha(5f, textAllHints));
+
+    }
+
+    public IEnumerator FadeTextToZeroAlpha(float t, Text i)
+    {
+        i.color = new Color(i.color.r, i.color.g, i.color.b, 1);
+        while (i.color.a > 0.0f)
+        {
+            i.color = new Color(i.color.r, i.color.g, i.color.b, i.color.a - (Time.deltaTime / t));
+            yield return null;
+        }
+    }
+
     // Update is called once per frame
     void Update()
     {
@@ -52,6 +75,10 @@ public class cinezoom : MonoBehaviour
                 vcam.m_Lens.OrthographicSize += zoomModifier;
                 if (vcam.m_Lens.OrthographicSize >= 36f)
                 {
+                    if(PlayerPrefs.GetInt("AllHints", 0) == 0)
+                    {
+                        TextAllHints();
+                    }
                     PlayerPrefs.SetInt("AllHints", 1);
                     zoomModifierSpeed = 0.01f;
                 }

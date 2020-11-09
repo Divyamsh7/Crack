@@ -11,6 +11,7 @@ public class cont : MonoBehaviour
         
         if (other.collider.gameObject.GetComponent<Rigidbody2D>().ToString().Equals("Character (UnityEngine.Rigidbody2D)"))
         {
+           // PlayerPrefs.DeleteAll();
             PlayerPrefs.SetInt("Continue", 1);
             //SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex + 1);
         }
